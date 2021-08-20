@@ -11,8 +11,9 @@ cap.set(4, frameHeight)
 
 
 def hareket(x, y, area_param):
-    har_x = 500 * math.tanh((3 * x / 500 - 9)) + 1500
-    har_y = 500 * math.tanh((3 * y / 500 - 9)) + 1500
+
+    har_x = 500 * math.tanh((3 * (x - frameWidth / 2) / 500 - 9)) + 1500
+    har_y = 500 * math.tanh((3 * (y - frameHeight / 2) / 500 - 9)) + 1500
     return har_x, har_y
 
 
@@ -41,7 +42,7 @@ while True:
         # print(len(approx))
         area = cv2.contourArea(cnt)
 
-        if len(approx) == 4 and minarea <= area < width * height * 0.8:
+        if len(approx) == 4 and min_area <= area < width * height * 0.8:
             M = cv2.moments(cnt)
             # print( M )
 
