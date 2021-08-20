@@ -2,14 +2,17 @@ import cv2
 import numpy as np
 import math
 
-minarea = 1000
-
+min_area = 1000
+frameWidth = 640
+frameHeight = 480
 cap = cv2.VideoCapture(0)
+cap.set(3, frameWidth)
+cap.set(4, frameHeight)
 
 
 def hareket(x, y, area_param):
-    har_y = 500 * math.tanh((3 * x / 500 - 9)) + 1500
-    har_x = 500 * math.tanh((3 * y / 500 - 9)) + 1500
+    har_x = 500 * math.tanh((3 * x / 500 - 9)) + 1500
+    har_y = 500 * math.tanh((3 * y / 500 - 9)) + 1500
     return har_x, har_y
 
 
