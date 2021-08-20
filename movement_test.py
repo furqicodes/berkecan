@@ -13,8 +13,8 @@ cap.set(4, frameHeight)
 def hareket(x_raw, y_raw, area_param):
     x_out = 1.5649 * x_raw + 1000
     y_out = 2.0876 * y_raw + 1000
-    har_x = 500 * math.tanh(x_out) + 1500
-    har_y = 500 * math.tanh(y_out) + 1500
+    har_x = 500 * math.tanh(3 * x_out / 500 - 9) + 1500
+    har_y = 500 * math.tanh((3 * y_out / 500 - 9)) + 1500
     return har_x, har_y
 
 
