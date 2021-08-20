@@ -66,7 +66,7 @@ while True:
             cv2.drawContours(yellow_mask, [cnt], 0, 255, -1)
             cv2.circle(yellow_mask, (center_x, center_y), 1, (0, 0, 255), 3)
 
-            print(hareket(cart[2], cart[3], area))
+            print(hareket(center_x, center_y, area))
 
     cv2.imshow("mask", yellow_mask)
     # result = frame.copy()
