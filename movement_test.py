@@ -10,10 +10,11 @@ cap.set(3, frameWidth)
 cap.set(4, frameHeight)
 
 
-def movement(x_raw, y_raw, area_param):
+def movement(x_raw, y_raw, area_raw):
     har_x = -500 * (-3 + math.tanh(1.656 - 0.0051828 * x_raw))
     har_y = -500 * (-3 + math.tanh(1.656 - 0.0069144 * y_raw))
-    return har_x, har_y
+    har_z = -(100 * area_raw / (frameHeight * frameWidth)) / 40 * 276 + 1776
+    return har_x, har_y, har_z
 
 
 while True:
@@ -29,6 +30,8 @@ while True:
     # yellow color mask
     lower = np.uint8([10, 0, 100])
     upper = np.uint8([40, 255, 255])
+    # lower = np.uint8([100, 100, 100])
+    # upper = np.uint8([200, 200, 200])
     yellow_mask = cv2.inRange(image, lower, upper)
 
     ret, thresh = cv2.threshold(yellow_mask, 127, 255, 1)
