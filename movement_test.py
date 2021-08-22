@@ -10,11 +10,9 @@ cap.set(3, frameWidth)
 cap.set(4, frameHeight)
 
 
-def hareket(x_raw, y_raw, area_param):
-    x_out = 1.5649 * x_raw + 1000
-    y_out = 2.0876 * y_raw + 1000
-    har_x = 500 * math.tanh(3 * x_out / 500 - 9) + 1500
-    har_y = 500 * math.tanh((3 * y_out / 500 - 9)) + 1500
+def movement(x_raw, y_raw, area_param):
+    har_x = -500 * (-3 + math.tanh(1.656 - 0.0051828 * x_raw))
+    har_y = -500 * (-3 + math.tanh(1.656 - 0.0069144 * y_raw))
     return har_x, har_y
 
 
@@ -66,7 +64,7 @@ while True:
             cv2.drawContours(yellow_mask, [cnt], 0, 255, -1)
             cv2.circle(yellow_mask, (center_x, center_y), 1, (0, 0, 255), 3)
 
-            print(hareket(center_x, center_y, area))
+            print(movement(center_x, center_y, area))
 
     cv2.imshow("mask", yellow_mask)
     # result = frame.copy()
