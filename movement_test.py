@@ -11,9 +11,12 @@ cap.set(4, frameHeight)
 
 
 def movement(x_raw, y_raw, area_raw):
-    har_x = -500 * (-3 + math.tanh(1.656 - 0.0051828 * x_raw))
-    har_y = -500 * (-3 + math.tanh(1.656 - 0.0069144 * y_raw))
-    har_z = -(100 * area_raw / (frameHeight * frameWidth)) / 40 * 276 + 1776
+    # har_x = -500 * (-3 + math.tanh(1.656 - 0.0051828 * x_raw))
+    # har_y = -500 * (-3 + math.tanh(1.656 - 0.0069144 * y_raw))
+    # har_z = -0.006 * area_raw + 1625  # -2.5253 * (100 * area_raw / (640 * 480)) + 1373.74
+    har_x = 0.3912 * x_raw + 1375
+    har_y = 1.0438 * y_raw + 1250
+    har_z = -(100 * area_raw / (frameWidth * frameHeight)) / 40 * 276 + 1776
     return har_x, har_y, har_z
 
 
@@ -53,16 +56,16 @@ while True:
             print("rectangle")
             print("x: ", center_x, "y: ", center_y)
             print("**")
-            cart = [0, 0, 0, 0]
-            cart[0] = width / 2 - 1  # x_ax_pos
-            cart[1] = height / 2 - 1  # y_ax_pos
-            cart[2] = center_x - cart[0]  # x
-            cart[3] = - center_y + cart[1]  # y
-            # print(cart)
-
-            cv2.putText(yellow_mask, "X: " + str(cart[2]) + " Y: " + str(cart[3]), (center_x + 20, center_y + 20),
-                        cv2.FONT_HERSHEY_COMPLEX, .7,
-                        (0, 255, 0), 2)
+            # cart = [0, 0, 0, 0]
+            # cart[0] = width / 2 - 1  # x_ax_pos
+            # cart[1] = height / 2 - 1  # y_ax_pos
+            # cart[2] = center_x - cart[0]  # x
+            # cart[3] = - center_y + cart[1]  # y
+            # # print(cart)
+            #
+            # cv2.putText(yellow_mask, "X: " + str(cart[2]) + " Y: " + str(cart[3]), (center_x + 20, center_y + 20),
+            #             cv2.FONT_HERSHEY_COMPLEX, .7,
+            #             (255, 255, 0), 2)
 
             cv2.drawContours(yellow_mask, [cnt], 0, 255, -1)
             cv2.circle(yellow_mask, (center_x, center_y), 1, (0, 0, 255), 3)
