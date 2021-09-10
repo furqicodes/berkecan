@@ -62,6 +62,12 @@ while True:
     # cv2.imshow("mask", yellow_mask)
     # result = frame.copy()
 
+    out = cv2.VideoWriter('project.avi', cv2.VideoWriter_fourcc(*'DIVX'), 15, (frameWidth, frameHeight))
+
+    for i in range(1000):
+        out.write(yellow_mask)
+    out.release()
+
     key = cv2.waitKey(1)
     if key == 27:
         break
