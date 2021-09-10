@@ -3,11 +3,12 @@ import numpy as np
 
 flag = False
 min_area = 1000
-frameWidth = 640
-frameHeight = 480
 cap = cv2.VideoCapture(0)
-cap.set(3, frameWidth)
-cap.set(4, frameHeight)
+frameWidth = int(cap.get(3))
+frameHeight = int(cap.get(4))
+
+# Define the codec and filename.
+out = cv2.VideoWriter('output.avi', cv2.VideoWriter_fourcc('M', 'J', 'P', 'G'), 10, (frameWidth, frameHeight))
 
 
 def return_object():
@@ -59,18 +60,14 @@ while True:
         else:
             flag = False
 
-    # cv2.imshow("mask", yellow_mask)
+    out.write(frame)  # np.random.randint(0, 255, (480, 640, 3)).astype('uint8'))
+    cv2.imshow("mask", yellow_mask)
     # result = frame.copy()
-
-    out = cv2.VideoWriter('project.avi', cv2.VideoWriter_fourcc(*'DIVX'), 15, (frameWidth, frameHeight))
-
-    for i in range(1000):
-        out.write(yellow_mask)
-    out.release()
 
     key = cv2.waitKey(1)
     if key == 27:
         break
 
 cap.release()
-# cv2.destroyAllWindows()
+out.release()
+cv2.destroyAllWindows()
