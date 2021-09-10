@@ -10,6 +10,9 @@ def movement(x_raw, y_raw, area_raw):
     har_x = 0.3912 * x_raw + 1375
     har_y = 1.0438 * y_raw + 1250
     har_z = -(100 * area_raw / (frameWidth * frameHeight)) / 40 * 276 + 1776
+    # print("rectangle")
+    # print("x: ", center_x, "y: ", center_y)
+    # print("**")
     return har_x, har_y, har_z
 
 
